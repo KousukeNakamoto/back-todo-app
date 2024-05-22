@@ -2,11 +2,9 @@ package com.example.sample;
 
 import java.time.LocalDateTime;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ToDoForm {
 	//	private String username;
 	//	private String password;
@@ -15,4 +13,6 @@ public class ToDoForm {
 	private String title;
 	private String description;
 	private LocalDateTime due_date;
+	private boolean completed;
+
 }

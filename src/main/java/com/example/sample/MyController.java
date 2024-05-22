@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,15 +45,20 @@ public class MyController {
 		todoService.createToDo(todo);
 	}
 
+	@PatchMapping("/update_todo")
+	public void updateToDo(@RequestBody ToDoForm post) {
+		ToDo todo = new ToDo(post.getTitle(), post.getDescription(), post.getUser_id(), post.getDue_date());
+		todo.setId(post.getTodo_id());
+		todo.setDue_date(post.getDue_date());
+		todo.setCompleted(post.isCompleted());
+		System.out.println(post.isCompleted());
+		System.out.println(todo.getId());
+		todoService.update(todo);
+	}
+
 	@PostMapping("/delete_todo")
 	public void deleteToDo(@RequestBody ToDoForm post) {
 		todoService.delete(post.getTodo_id());
 	}
 
-	@PostMapping("/update_todo")
-	public void updateToDo(@RequestBody ToDoForm post) {
-		ToDo todo = new ToDo(post.getTitle(), post.getDescription(), post.getUser_id(), post.getDue_date());
-		todo.setId(post.getTodo_id());
-		todoService.update(todo);
-	}
 }

@@ -24,6 +24,7 @@ public class ToDoService {
 	}
 
 	public void update(ToDo todo) {
+		System.out.println(todo.getId());
 		todoRepository.save(todo);
 	}
 }
